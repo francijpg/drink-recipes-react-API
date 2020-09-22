@@ -18,11 +18,18 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 450,
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: 450,
+    },
+    maxHeight: 500,
+    overflowY: "auto",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  },
+  }
 }));
 
 const Receta = ({ receta }) => {
@@ -97,7 +104,11 @@ const Receta = ({ receta }) => {
               <h3 className="mt-4">Instrucciones</h3>
               <p>{informacion.strInstructions}</p>
 
-              <img className="img-fluid my-4" src={informacion.strDrinkThumb} />
+              <img
+                className="img-fluid my-4"
+                src={informacion.strDrinkThumb}
+                alt={`Imagen de ${informacion.strDrink}`}
+              />
 
               <h3>Ingredientes y cantidades</h3>
               <ul>{mostrarIngredientes(informacion)}</ul>
